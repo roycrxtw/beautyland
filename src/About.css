@@ -1,0 +1,28 @@
+
+.about a{
+  color: wheat;
+}
+.about a:hover{
+  color: #D2BD97;
+}
+
+.about{
+  position: relative;
+  width: 100%;
+  margin: 50px auto;
+  border: 1px solid grey;
+  padding: 10px;
+  background-color: grey;
+  color: snow;
+  text-align: left;
+  overflow: hidden;
+}
+@media (min-width: 1024px){
+  .about{
+    height: 100%;
+    margin: 50px auto;
+    border-radius: 3px;
+    padding: 30px 200px;
+    font-size: large;
+  }
+}

@@ -1,0 +1,23 @@
+
+.btnPostInfo{
+  display: flex;
+  position: fixed;
+  left: 35px;
+  bottom: 140px;
+  width: 64px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);;
+  color: snow;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 30;
+  transition: all 700ms;
+}
+.btnPostInfo:hover{
+  color: black;
+  background: rgba(255, 250, 250, 0.9);
+}

@@ -1,0 +1,33 @@
+
+.menu{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  background: #292F2F;
+  color: grey;
+  font-family: Courier New, Courier, monospace;
+  width: 150px;
+  height: 100%;
+  transform: translateX(-150px);
+  transition: all 700ms;
+}
+.menu.isActive{
+  transform: translateX(0);
+}
+
+.menu .menuFooter{
+  color: snow;
+  width: 150px;
+  font-size: 14px;
+  line-height: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 40px;
+}
+
+.menu .menuList{
+  padding: 0;
+  margin: 220px 0 0 0;
+  list-style: none;
+}

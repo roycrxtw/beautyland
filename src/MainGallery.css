@@ -1,0 +1,22 @@
+
+
+.btnLoadmore{
+  clear: both;
+  display: block;
+  width: 150px;
+  height: 93px;
+  margin: 110px auto;
+  border: 1px solid snow;
+  border-radius: 5px;
+  background-color: #585858;
+  color: snow;
+  font-size: 16px;
+  line-height: 93px;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.btnLoadmore:hover{
+  color: black;
+  background-color: snow;
+  border: 1px solid darkslategrey;
+}

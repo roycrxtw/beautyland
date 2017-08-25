@@ -1,0 +1,92 @@
+
+.btnCloseInfoBox{
+  float: right;
+  color: snow;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.btnCloseInfoBox:hover{
+  color: grey;
+}
+
+.box{
+  position: fixed;
+  
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0px solid red;
+}
+@media (min-width: 1024px){
+  .box{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0px solid red;
+  }
+}
+
+.boxModal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 250;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.90);
+}
+
+.imageBoxContent{
+  border: 0px solid blue;
+  width: 100%;
+  z-index: 500;
+}
+@media (min-width: 1024px) and (orientation: landscape){
+  .imageBoxContent{
+    width: auto;
+    height: 100%;
+  }
+}
+@media (min-width: 1024px) and (orientation: portrait){
+  .imageBoxContent{
+    width: 100%;
+    height: auto;
+  }
+}
+
+.infoBoxHeader{
+  color: snow;
+  font-size: x-large;
+  font-family: Courier New, Courier, monospace;
+  width: 100%;
+  padding: 15px 30px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.infoBoxContent{
+  width: 90%;
+  margin: 30px auto;
+  border: 1px solid snow;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: snow;
+  font-size: large;
+  text-align: left;
+  word-wrap: break-word;
+  z-index: 300;
+}
+@media (min-width: 1024px){
+  .infoBoxContent{
+    width: 500px;
+    margin: 100px auto;
+  }
+}
+
+.infoBoxContent a{
+  color: #267D53;
+  text-decoration: none;
+}
