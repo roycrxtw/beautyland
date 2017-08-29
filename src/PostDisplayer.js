@@ -4,7 +4,6 @@
  */
 
 import React, { Component } from 'react';
-//import Gallery from 'react-photo-gallery';
 import Gallery from 'react-grid-gallery';
 import LightBox from './LightBox';
 
@@ -13,32 +12,21 @@ import './PostDisplayer.css';
 export default class PostDisplayer extends Component{
   constructor(props){
     super(props);
-    console.log('PostDisplayer.ctor() started. post=%s.', props.post);
-    console.log('PostDisplayer.ctor(): prop.match=', props.match);
-    console.log('PostDisplayer.ctor(): props.history=', props.history);
     
     this.state = {
-      galleryColumns: props.cols || 2,
       post: props.post,
       isBoxOpen: false,
       boxContentType: null,
-      boxContent: null,
-      currentImage: 'http://i.imgur.com/FQejsSN.jpg'
+      boxContent: null
     };
   }
 
-  componentDidUpdate(){
-    //window.scroll(0, 0);
-  }
-
   callGoBackHandler = () => {
-    //this.props.history.goBack();
     this.props.goBackHandler();
   };
 
-  openImageBox = (index) => {
+  openImageBox = (index, event) => {
     const post = this.state.post;
-    console.log('openImageBox() started. Now trying to open lightbox. Image index=', index);
     this.setState({
       isBoxOpen: true,
       boxContentType: 'image',
@@ -47,9 +35,7 @@ export default class PostDisplayer extends Component{
   };
 
   closeLightBox = () => {
-    this.setState({
-        isBoxOpen: false
-    });
+    this.setState( {isBoxOpen: false} );
   }
 
   // Show post info in the lightbox
@@ -80,7 +66,9 @@ export default class PostDisplayer extends Component{
         let temp = {};
         temp.src = x;
         temp.thumbnail = x;
-        temp.thumbnailWidth = 300;
+        // the old post data structure doesn't contain width/height data
+        // we have to set some default value for them
+        temp.thumbnailWidth = 300; 
         temp.thumbnailHeight = 300;
         imglist.push(temp);
       });
@@ -103,7 +91,7 @@ export default class PostDisplayer extends Component{
                 <i className="material-icons">help_outline</i>
               </div>
               <Gallery images={this.getPostImageList()}
-                rowHeight='300'
+                rowHeight={300}
                 enableImageSelection={false}
                 onClickThumbnail={this.openImageBox}
               />

@@ -28,7 +28,7 @@ export default class LightBox extends Component{
           Post Information
           <i className='btnCloseInfoBox material-icons' onClick={this.closeLightBox}>close</i>
         </div>
-        <ul style={{'list-style': 'none'}}>
+        <ul>
           <li>{this.props.content.title}</li>
           <li>Author: {this.props.content.author}</li>
           <li>

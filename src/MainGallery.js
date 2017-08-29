@@ -4,11 +4,11 @@
  */
 
 import React, { Component } from 'react';
-//import Gallery from 'react-photo-gallery';
 import Gallery from 'react-grid-gallery';
-import './MainGallery.css';
 
 import PostDisplayer from './PostDisplayer';
+
+import './MainGallery.css';
 
 const basedata = [{
   images: [
@@ -21,8 +21,7 @@ export default class MainGallery extends Component {
     super(props);
 
     let url = null;
-    console.log('type=', props.type);
-    if(props.type === 'trends'){
+    if(props.location.pathname === '/trends'){
       url = 'http://beautyland-api.royvbtw.uk/trends';
     }else{
       url = 'http://beautyland-api.royvbtw.uk/latest';
@@ -42,14 +41,14 @@ export default class MainGallery extends Component {
 
   componentDidUpdate(){
     if(this.state.isGalleryMode){
-      window.scrollTo(0, Math.ceil(this.state.viewOffsetY));
+      const offset = this.state.viewOffsetY;
+      window.scroll(0, Math.ceil(offset));
     }else{
-      window.scroll(0, 0);
+      //window.scroll(0, 0);
     }
   }
 
   galleryClickHandler = (postIndex, event) => {
-    // SAVE viewOffset and push to post:pid
     this.updateViewCount(this.state.postList[postIndex].postId);
     this.setState({
       isGalleryMode: false,
@@ -83,8 +82,6 @@ export default class MainGallery extends Component {
     };
 
   goBackHandler = () => {
-    console.log('MG.goBackHandler() started.');
-    //window.scroll(0, this.state.viewOffsetY);
     this.setState({
       isGalleryMode: true
     });
@@ -95,21 +92,16 @@ export default class MainGallery extends Component {
    */
   updateViewCount = (postId) => { // #todo
     const url = 'http://beautyland-api.royvbtw.uk/post/' + postId;
-    console.log('MG.updateViewCount, url=', url);
-    fetch(url, {method: 'PUT'}).then(res => {
-      console.log('updateViewCount() code=', res.status);
-      console.log('updateViewCount(), res=', res);
-    });  // simply send put request
+    fetch(url, {method: 'PUT'}).then();  // simply send put request
   };
 
   /**
    * Click event handler for loadMore button.
    */
   loadMore = (event) => {
-    console.log('App.loadMore() started');
-    let viewOffsetY = window.scrollY;
-    let newPageNumber = this.state.page + 1;
-    let url = this.state.apiUrl + '/' + newPageNumber;
+    const viewOffsetY = window.scrollY;
+    const newPageNumber = this.state.page + 1;
+    const url = this.state.apiUrl + '/' + newPageNumber;
     this.loadPostData(url);
 
     this.setState({
@@ -119,46 +111,27 @@ export default class MainGallery extends Component {
   };
 
   loadPostData = function(url){
-    console.log('MG.loadPostData(). Fetching %s', url);
     fetch(url).then( function(response){
-      //console.log('response status code=', response.status);
       return response.json();   // note: json() returns a promise
     }).then(data => {
-      // console.log('data.length=', data.length);
-      // console.log('typeof data=', typeof data);
-      // console.log('data=', data);
-      
       let currentList = this.state.postList;
-      //console.log('is currentList an array: %s', Array.isArray(currentList));
       currentList = currentList.concat(data);
       this.setState({postList: currentList});
-      //console.log('is postList an array=%s', Array.isArray(this.state.postList));
     }).catch( err => {
       console.log(err.message);
     });
   };
 
-  test = () => {
-    console.log('test');
-  };
-
   render(){
-    console.log('MG.render() started. isGalleryMode=%s', this.state.isGalleryMode);
-
     let content;
     if(this.state.isGalleryMode){
       content = (
         <div>
           <Gallery images={this.getGalleryImageList()}
-            rowHeight='250'
+            rowHeight={250}
             enableImageSelection={false}
             onClickThumbnail={this.galleryClickHandler}
           />
-          {/* <Gallery 
-            cols={this.props.cols} 
-            photos={this.getGalleryImageList()} 
-            onClickPhoto={this.galleryClickHandler}
-          /> */}
           <div className='btnLoadmore' onClick={this.loadMore}>
             more
           </div>
@@ -167,7 +140,6 @@ export default class MainGallery extends Component {
     }else{
       content = (
         <PostDisplayer 
-          cols={this.props.cols} 
           post={this.state.post}
           goBackHandler={this.goBackHandler} 
         />
