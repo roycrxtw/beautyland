@@ -57,6 +57,11 @@ export default class MainGallery extends Component {
     }
   }
 
+  componentWillUnmount(){
+    console.log('willUnmount()');
+    window.removeEventListener('scroll', this.scrollHandler);
+  }
+
   isScrollIntoView = (ele) => {
     const top = ele.getBoundingClientRect().top;
     return (top <= window.innerHeight);
@@ -155,7 +160,7 @@ export default class MainGallery extends Component {
   };
 
   scrollHandler = () => {
-    if(!this.isLoadingData){
+    if(!this.isLoadingData && this.state.isGalleryMode){
       const btnLoadMore = document.getElementsByClassName('btnLoadmore')[0];
       const isButtonInView = this.isScrollIntoView(btnLoadMore);
       if(isButtonInView){
