@@ -11,7 +11,7 @@
   width: 100%;
   margin: 50px auto;
   border: 1px solid grey;
-  padding: 10px;
+  padding: 20px;
   background-color: grey;
   color: snow;
   text-align: left;
@@ -20,7 +20,7 @@
 @media (min-width: 1024px){
   .about{
     height: 100%;
-    margin: 50px auto;
+    margin: 60px auto;
     border-radius: 3px;
     padding: 30px 200px;
     font-size: large;

@@ -27,16 +27,25 @@ export default class MainGallery extends Component {
       url = 'http://beautyland-api.royvbtw.uk/latest';
     }
 
+    window.addEventListener('scroll', this.scrollHandler);
+
+    this.isLoadingData = false;
+
     this.state = {
       isGalleryMode: true,
       apiUrl: url,
-      page: 1,
+      page: 0,
       postList: [],
       post: null,
-      viewOffsetY: 0
+      viewOffsetY: 0,
+      disableBtnLoadmore: false
     }
 
-    this.loadPostData(url);   //set up initial data
+    //this.loadMore(url);   //set up initial data
+  }
+
+  componentWillMount(){
+    this.loadMore(this.state.apiUrl);
   }
 
   componentDidUpdate(){
@@ -47,6 +56,11 @@ export default class MainGallery extends Component {
       //window.scroll(0, 0);
     }
   }
+
+  isScrollIntoView = (ele) => {
+    const top = ele.getBoundingClientRect().top;
+    return (top <= window.innerHeight);
+  };
 
   galleryClickHandler = (postIndex, event) => {
     this.updateViewCount(this.state.postList[postIndex].postId);
@@ -99,42 +113,72 @@ export default class MainGallery extends Component {
    * Click event handler for loadMore button.
    */
   loadMore = (event) => {
+    console.log('loadMore() started.');
+    if(this.isLoadingData) return;
+    
     const viewOffsetY = window.scrollY;
     const newPageNumber = this.state.page + 1;
+    console.log('loadmore with page %s', newPageNumber);
     const url = this.state.apiUrl + '/' + newPageNumber;
     this.loadPostData(url);
 
     this.setState({
-      page: newPageNumber,
       viewOffsetY: viewOffsetY
     });
   };
 
   loadPostData = function(url){
+    console.log('loadPostData, url=', url);
+    this.isLoadingData = true;
     fetch(url).then( function(response){
       return response.json();   // note: json() returns a promise
     }).then(data => {
-      let currentList = this.state.postList;
-      currentList = currentList.concat(data);
-      this.setState({postList: currentList});
+      if(data.length === 0){
+        console.log('No more data');
+        this.setState({
+          disableBtnLoadmore: true
+        });
+      }else{
+        let currentList = this.state.postList;
+        currentList = currentList.concat(data);
+        this.isLoadingData = false;
+        const p = this.state.page;
+        this.setState({
+          page: p + 1,
+          postList: currentList
+        });
+      }
+      
     }).catch( err => {
       console.log(err.message);
     });
+  };
+
+  scrollHandler = () => {
+    if(!this.isLoadingData){
+      const btnLoadMore = document.getElementsByClassName('btnLoadmore')[0];
+      const isButtonInView = this.isScrollIntoView(btnLoadMore);
+      if(isButtonInView){
+        this.loadMore();
+      }
+    }
+    
+    //console.log('scrollHandler, top=', btnLoadMore.getBoundingClientRect().top);
+    //console.log('scrollHandler, bottom=', btnLoadMore.getBoundingClientRect().bottom);
+
   };
 
   render(){
     let content;
     if(this.state.isGalleryMode){
       content = (
-        <div>
+        <div onClick={this.scrollHandler}>
           <Gallery images={this.getGalleryImageList()}
             rowHeight={250}
             enableImageSelection={false}
             onClickThumbnail={this.galleryClickHandler}
           />
-          <div className='btnLoadmore' onClick={this.loadMore}>
-            more
-          </div>
+          <div className='btnLoadmore' disabled={this.state.disableBtnLoadmore}>no more data</div>
         </div>
       );
     }else{

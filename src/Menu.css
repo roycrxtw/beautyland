@@ -32,3 +32,8 @@
   margin: 220px 0 0 0;
   list-style: none;
 }
+@media (max-width: 719px) and (orientation: landscape){
+  .menu .menuList{
+    margin: 50px 0 0 0;
+  }
+}
