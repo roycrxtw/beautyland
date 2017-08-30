@@ -1,14 +1,15 @@
 
 .menu{
   position: fixed;
-  left: 0;
+  left: 0px;
   top: 0;
   z-index: 200;
+  width: 150px;
+  height: 100%;
   background: #292F2F;
   color: grey;
   font-family: Courier New, Courier, monospace;
-  width: 150px;
-  height: 100%;
+  text-align: center;
   transform: translateX(-150px);
   transition: all 700ms;
 }

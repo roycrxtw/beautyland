@@ -21,3 +21,9 @@
   color: black;
   background: rgba(255, 250, 250, 0.9);
 }
+
+.postDisplayer{
+  display: block;
+  margin: 0;
+  border: 1px solid grey;
+}

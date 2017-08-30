@@ -13,14 +13,31 @@ a:hover{
 
 body{
   background-color: snow;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+body.hasActiveMenu{
+  overflow-y: hidden;
 }
 
 .activeItem{
   color: red;
 }
 
-.App {
-  text-align: center;
+.appContext{
+  /* border: 5px solid blue; */
+  transition: all 700ms;
+}
+.appContext.isActive{
+  transform: translateX(150px); 
+}
+
+/* to prevent a bug in chrome */
+@media (-webkit-min-device-pixel-ratio: 0) {
+  .appContext.isActive{
+    /* border: 5px solid yellow; */
+    transform: none;
+  }
 }
 
 .app-title{
@@ -29,34 +46,22 @@ body{
   font-size: 25px;
   font-family: Courier New;
   font-weight: 100;
+  text-align: center;
 }
 
 .appHeader {
   background-color: #222;
-  height: 80px;
-  padding: 20px;
-  color: lightgrey;
-  font-size: large;
-  line-height: 50px;
+  height: 75px;
+  padding: 25px;
 }
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-
-
 
 .btnBack{
   position: fixed;
   left: 35px;
   bottom: 90px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 64px;
   height: 40px;
   border: 1px solid grey;
@@ -64,8 +69,6 @@ body{
   background-color: rgba(0, 0, 0, 0.6);;
   color: snow;
   cursor: pointer;
-  justify-content: center;
-  align-items: center;
   z-index: 30;
   transition: all 700ms;
 }
@@ -74,63 +77,34 @@ body{
   background: rgba(255, 250, 250, 0.9);
 }
 
-.postDisplayer{
-  display: block;
-  margin: 0 0px;
-  border: 1px solid grey;
-}
-
-.postTitle{
-  color: grey;
-  font-size: 14px;
-}
-
-body{
-  overflow-x: hidden;
-  overflow-y: visible;
-}
-body.hasActiveMenu{
-  overflow-y: visible;
-}
-
-
-
-
-
 .btnMenu{
   position: fixed;
-  left: 15px;
+  left: 35px;
   bottom: 40px;
-  width: 64px;
-  height: 40px;
-  margin: 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
-  color: snow;
-  background: rgba(0, 0, 0, 0.6);
+  width: 64px;
+  height: 40px;
+  z-index: 100;
   border: 1px solid grey;
   border-radius: 3px;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  color: snow;
   cursor: pointer;
-  transform: translateX(0px);
   transition: all 700ms;
 }
 .btnMenu:hover{
   color: black;
   background: rgba(255, 250, 250, 0.9);
-  transition: all 500ms;
 }
 .btnMenu.isActive{
+  left: 35px;
   bottom: 40px;
   transform: translateX(150px);
-  transition: all 700ms;
   opacity: 1;
 }
-
-
-
-
 
 .menu .menuItem{
   display: block;
@@ -145,19 +119,13 @@ body.hasActiveMenu{
 
 
 
-.appContext{
-  transition: all 700ms;
-}
 
-.appContext.isActive{
-  transform: translateX(150px);
-}
 
 .mask{
   position: fixed;
-  z-index: 100;
   left: 0;
   top: 0;
+  z-index: 100;
   width: 0;
   height: 0;
   opacity: 0;
@@ -166,9 +134,10 @@ body.hasActiveMenu{
   transition: opacity 300ms, width 0ms 300ms, height 0ms 300ms;
 }
 .mask.isActive{
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   opacity: 0.7;
+  /* border: 10px solid red; */
   transition: opacity 300ms;
 }
 

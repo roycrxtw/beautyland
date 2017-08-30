@@ -24,13 +24,13 @@ const NotFound = () => (
   <p>Hello, do you get lost?</p>
 );
 
-class App extends Component {
+export default class App extends Component {
   toggleMenu = () => {
     document.getElementsByClassName('mask')[0].classList.toggle('isActive');
     document.getElementsByClassName('menu')[0].classList.toggle('isActive');
     document.getElementsByClassName('appContext')[0].classList.toggle('isActive');
     document.getElementsByClassName('btnMenu')[0].classList.toggle('isActive');
-    document.getElementsByTagName('body')[0].classList.toggle('hasActiveMenu');    
+    document.getElementsByTagName('body')[0].classList.toggle('hasActiveMenu');
   };
 
   // A button to open the menu
@@ -55,21 +55,23 @@ class App extends Component {
   render() {
     return ( 
       <div className="App">
-        <div className='appContext'>
-          {Header}
-          <Switch>
-            <Route exact path='/' component={this.LatestGallery} />
-            <Route exact path='/trends' component={this.TrendsGallery} />
-            <Route exact path='/about' component={About} />
-            <Route component={NotFound} />
-          </Switch> 
-        </div>
         {this.MenuButton}
         <div className='mask' onClick={this.toggleMenu}></div>
         <Menu onNavLinkClick={this.toggleMenu} />
+        
+        <div className='appContext'>
+        {Header}
+          <div>
+            <Switch>
+              <Route exact path='/' component={this.LatestGallery} />
+              <Route exact path='/trends' component={this.TrendsGallery} />
+              <Route exact path='/about' component={About} />
+              <Route component={NotFound} />
+            </Switch> 
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
