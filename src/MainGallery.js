@@ -22,9 +22,9 @@ export default class MainGallery extends Component {
 
     let url = null;
     if(props.location.pathname === '/trends'){
-      url = 'http://beautyland-api.royvbtw.uk/trends';
+      url = 'https://beautyland-api.royvbtw.uk/trends';
     }else{
-      url = 'http://beautyland-api.royvbtw.uk/latest';
+      url = 'https://beautyland-api.royvbtw.uk/latest';
     }
 
     window.addEventListener('scroll', this.scrollHandler);
@@ -76,7 +76,10 @@ export default class MainGallery extends Component {
     });
   };
 
-  // to build the image list, it will be used in the Gallery component
+
+  /**
+   * To build the image list which will be used in the Gallery component
+   */
   getGalleryImageList = () => {
       let imageListForGallery = [];
       let postList = [];
@@ -90,11 +93,14 @@ export default class MainGallery extends Component {
         //const imageListLength = (post.images)? post.images.length: post.imgUrls.length;
         //const imageIndex = Math.floor(Math.random() * imageListLength);
         const imageIndex = 0;
+        if(post.images[imageIndex].length === 0){
+          return;
+        }
         const imageData = {};
-        imageData.src = (post.images)? post.images[imageIndex].url: post.imgUrls[imageIndex];
+        imageData.src = post.images[imageIndex].url;
         imageData.thumbnail = imageData.src;
-        imageData.thumbnailWidth = (post.images)? (post.images[imageIndex].width? post.images[imageIndex].width: 600): 600;
-        imageData.thumbnailHeight = (post.images)? (post.images[imageIndex].height? post.images[imageIndex].height: 600): 600;
+        imageData.thumbnailWidth = (post.images[imageIndex].width)? post.images[imageIndex].width: 300;
+        imageData.thumbnailHeight = (post.images[imageIndex].height)? post.images[imageIndex].height: 300;
         imageListForGallery.push(imageData);
       });
       return imageListForGallery;
