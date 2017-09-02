@@ -1,6 +1,8 @@
 # Beatuyland 
 
-Beautyland is an image gallery for PTT Beauty board. 
+Beautyland is an image gallery for [PTT Beauty board](https://www.ptt.cc/bbs/Beauty). 
+
+It provides a quick and convenient preview of the Beauty board. It also provides a trends page which displays the most popular posts in this week.
 
 You can find this service at [https://beautyland.royvbtw.uk](https://beautyland.royvbtw.uk)
 
