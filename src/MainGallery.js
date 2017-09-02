@@ -116,7 +116,7 @@ export default class MainGallery extends Component {
    * Send a get reuqest to Beautyland api for increase the view count for specified post
    */
   updateViewCount = (postId) => { // #todo
-    const url = 'http://beautyland-api.royvbtw.uk/post/' + postId;
+    const url = 'https://beautyland-api.royvbtw.uk/post/' + postId;
     fetch(url, {method: 'PUT'}).then();  // simply send put request
   };
 

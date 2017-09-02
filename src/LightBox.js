@@ -37,6 +37,7 @@ export default class LightBox extends Component{
             </a>
           </li>
           <li>{new Date(this.props.content.createdAt).toISOString()}</li>
+          <li>view counts: {this.props.content.viewCount}</li>
         </ul>
       </div>);
     }else{
