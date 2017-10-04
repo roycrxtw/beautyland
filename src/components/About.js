@@ -10,7 +10,6 @@ import './About.css';
 export default class About extends Component {
   constructor(props){
     super(props);
-    console.log('About.ctor() started. Path=', props.location.pathname);
   }
 
   render() {

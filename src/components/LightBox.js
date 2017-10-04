@@ -1,5 +1,4 @@
 
-
 /**
  * Beautyland project - LightBox component
  */

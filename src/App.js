@@ -6,12 +6,12 @@
 
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import 'whatwg-fetch';
 
-import About from './About';
-import MainGallery from './MainGallery';
-import Menu from './Menu';
-
+import About from './components/About';
+import LatestGallery from './containers/LatestGallery';
+import TrendsGallery from './containers/TrendsGallery';
+import PostDisplayer from './components/PostDisplayer';
+import Menu from './components/Menu';
 import './App.css';
 
 const Header = (
@@ -21,7 +21,7 @@ const Header = (
 );
 
 const NotFound = () => (
-  <p>Hello, do you get lost?</p>
+  <div className='msg-not-found'>Hello, do you get lost?</div>
 );
 
 export default class App extends Component {
@@ -40,18 +40,6 @@ export default class App extends Component {
     </div>
   );
 
-  LatestGallery = (props) => {
-    return (
-      <MainGallery type='latest' {...props} />
-    );
-  };
-
-  TrendsGallery = (props) => {
-    return (
-      <MainGallery type='trends' {...props} />
-    );
-  };
-
   render() {
     return ( 
       <div className="App">
@@ -60,12 +48,13 @@ export default class App extends Component {
         <Menu onNavLinkClick={this.toggleMenu} />
         
         <div className='appContext'>
-        {Header}
+          {Header}
           <div>
             <Switch>
-              <Route exact path='/' component={this.LatestGallery} />
-              <Route exact path='/trends' component={this.TrendsGallery} />
+              <Route exact path='(/|/latest)' component={LatestGallery} />
+              <Route exact path='/trends' component={TrendsGallery} />
               <Route exact path='/about' component={About} />
+              <Route path='/post' component={PostDisplayer} />
               <Route component={NotFound} />
             </Switch> 
           </div>

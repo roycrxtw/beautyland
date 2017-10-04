@@ -1,10 +1,11 @@
 
 
 .btnLoadmore{
-  display: inline-block;
+  display: block;
   width: 150px;
   height: 93px;
-  margin: 50px 30px;
+  /* margin: 50px 30px; */
+  margin: 100px auto;
   border: 1px solid snow;
   border-radius: 5px;
   background-color: #585858;
@@ -12,7 +13,8 @@
   font-size: 16px;
   line-height: 93px;
   text-align: center;
-  opacity: 0;
+  opacity: 1;
+  clear: both;
 }
 
 .btnLoadmore[disabled]{

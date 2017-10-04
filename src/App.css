@@ -141,7 +141,12 @@ body.hasActiveMenu{
   transition: opacity 300ms;
 }
 
-
+.msg-not-found{
+  margin: 100px 30px;
+  border: 0px solid blue;
+  text-align: center;
+  font-size: x-large;
+}
 
 
 
