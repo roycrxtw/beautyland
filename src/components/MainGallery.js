@@ -118,7 +118,7 @@ export default class MainGallery extends Component {
           enableImageSelection={false}
           onClickThumbnail={this.galleryClickHandler}
         />
-        <div className='btnLoadmore' disabled={this.props.endOfList}>no more data</div>
+        <div className='btnLoadmore' disabled={this.props.endOfList}>more</div>
       </div>
     )
   }
