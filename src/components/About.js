@@ -20,7 +20,7 @@ export default class About extends Component {
         <p>You can find project codes in <a href='https://github.com/royvbtw/beautyland'>github</a></p>
         <p>And this is my place <a href='https://royvbtw.uk'>https://royvbtw.uk</a></p>
 
-        <p>T0145</p>
+        <p>T0225</p>
       </div>
     );
   }

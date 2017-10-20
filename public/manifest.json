@@ -3,9 +3,9 @@
   "name": "the Beautyland",
   "icons": [
     {
-      "src": "main-icon.webp",
+      "src": "icon-main.png",
       "sizes": "192x192",
-      "type": "image/webp"
+      "type": "image/png"
     }
   ],
   "start_url": "./",
