@@ -10,19 +10,23 @@
   position: relative;
   width: 100%;
   margin: 50px auto;
-  border: 1px solid grey;
+  border-left: 30px solid slateblue;
+  box-shadow: 0 0 5px snow;
   padding: 20px;
-  background-color: grey;
+  background-color: rgb(50, 50, 50);
+
   color: snow;
   text-align: left;
   overflow: hidden;
+
 }
-@media (min-width: 1024px){
+@media (min-width: 720px){
   .about{
     height: 100%;
     margin: 60px auto;
+    border-left: 100px solid lightcoral;
     border-radius: 3px;
-    padding: 30px 200px;
+    padding: 30px 50px;
     font-size: large;
   }
 }

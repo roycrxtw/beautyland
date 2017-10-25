@@ -11,6 +11,7 @@ import About from './components/About';
 import LatestGallery from './containers/LatestGallery';
 import TrendsGallery from './containers/TrendsGallery';
 import PostDisplayer from './components/PostDisplayer';
+import NotFound from './components/NotFound'
 import Menu from './components/Menu';
 import './App.css';
 
@@ -20,9 +21,12 @@ const Header = (
   </div>
 );
 
-const NotFound = () => (
-  <div className='msg-not-found'>Hello, do you get lost?</div>
-);
+const PageNotFound = props => {
+  console.log('PageNotFound: props', props);
+  return (
+    <NotFound {...props}>Do you get lost?</NotFound>
+  );
+}
 
 export default class App extends Component {
   toggleMenu = () => {
@@ -55,7 +59,7 @@ export default class App extends Component {
               <Route exact path='/trends' component={TrendsGallery} />
               <Route exact path='/about' component={About} />
               <Route path='/post' component={PostDisplayer} />
-              <Route component={NotFound} />
+              <Route component={PageNotFound} />
             </Switch> 
           </div>
         </div>

@@ -9,7 +9,8 @@ import Gallery from 'react-grid-gallery';
 import 'whatwg-fetch';
 
 import LightBox from './LightBox';
-
+import NotFound from './NotFound';
+import { getSafely } from '../util';
 import './PostDisplayer.css';
 
 
@@ -20,17 +21,23 @@ function errorHandler({message} = {}){
 export default class PostDisplayer extends Component{
   constructor(props){
     super(props);
-    const postId = /post\/(.*)/.exec(props.location.pathname)[1];
-
+    let postId;
+    const match = /post\/(.*)/.exec(props.location.pathname);
+    if(match){
+      postId = match[1];
+    }else{
+      postId = undefined;
+    }
+    
     this.state = {
       postId,
-      post: null,
+      post: undefined,
       isBoxOpen: false,
       boxContentType: null,
       boxContent: null
     };
 
-    if(!props.location.state || !props.location.state.post){
+    if(!getSafely(() => props.location.state.post)){
       this.fetchPost(postId);
     }else{
       this.updateViewCount(postId);
@@ -118,7 +125,7 @@ export default class PostDisplayer extends Component{
     return imglist;
   };
 
-  
+
   /**
    * Send a PUT reuqest to Beautyland api for update the view count for the specified post
    */
@@ -127,12 +134,12 @@ export default class PostDisplayer extends Component{
     fetch(url, {method: 'PUT'}).then();  // simply send put request
   };
 
-  
-
 
   render(){
+    const { post, isBoxOpen, boxContentType, boxContent } = this.state;
+
     let content = null;
-    if(this.state.post){
+    if(post){
       content = (
         <div>
           <div className='btnPostInfo' title='Post information' onClick={this.openInfoBox}>
@@ -144,15 +151,28 @@ export default class PostDisplayer extends Component{
             onClickThumbnail={this.openImageBox}
           />
           <LightBox 
-            isOpen={this.state.isBoxOpen} 
-            type={this.state.boxContentType}
-            content={this.state.boxContent} 
+            isOpen={isBoxOpen} 
+            type={boxContentType}
+            content={boxContent} 
             onCloseLightBox={this.closeLightBox} 
           />
         </div>
       );
+    }else if(post === undefined){
+      content = (
+        <NotFound>Loading post.</NotFound>
+        // <div className='no-data-message'>
+        //   The post does not exist.<br/>
+        //   <Link className='icon-navi' to='/' title='back'>
+        //     <i className="material-icons md-36">chevron_left</i>
+        //   </Link>
+        //   <div className='icon-navi' title='Visit Beautyland' onClick={this.gobackHandler}>
+        //     <i className='material-icons md-36'>home</i>
+        //   </div>
+        // </div>
+      );
     }else{
-      content = (<div className='no-data-message'>The post does not exist.</div>);
+      content = (<NotFound>The post does not exist.</NotFound>);
     }
 
     return (

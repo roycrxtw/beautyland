@@ -4,6 +4,8 @@
  * @author Roy Lu
  */
 
+import { API_URL } from '../config'
+
 export const REQUEST_LIST = 'REQUEST_LIST';
 export const RECEIVE_LIST = 'RECEIVE_LIST';
 export const CURRENT_PAGE = 'CURRENT_PAGE';
@@ -38,7 +40,7 @@ export const receiveList = (name, page, list) => {
 const fetchList = (name, page) => {
   return dispatch => {
     dispatch(requestList(name));
-    const url = `https://beautyland-api.royvbtw.uk/${name}/${page}`;
+    const url = `${API_URL}/${name}/${page}`;
     return fetch(url).then( res =>
       res.json()
     ).then(json => {

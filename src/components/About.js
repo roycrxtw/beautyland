@@ -8,10 +8,6 @@ import './About.css';
 
 
 export default class About extends Component {
-  constructor(props){
-    super(props);
-  }
-
   render() {
     return (
       <div className='about'>
