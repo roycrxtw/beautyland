@@ -42,7 +42,7 @@ const fetchList = (name, page) => {
   return dispatch => {
     dispatch(requestList(name));
     let url;
-    if(name === 'samples'){
+    if(name === 'samples'){   // the samples path does not have a page parameter.
       url = `${API_URL}/${name}`;
     }else{
       url = `${API_URL}/${name}/${page}`;
