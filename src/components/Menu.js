@@ -13,19 +13,20 @@ export default class Menu extends Component{
     const menuData = [
       {name: 'Home', to: '/'},
       {name: 'Trends', to: '/trends'},
+      {name: 'Random', to: '/samples'},
       {name: 'About', to: '/about'},
     ];
 
-    this.menuItems = menuData.map(x => 
+    this.menuItems = menuData.map( item => 
       (
-        <li key={x.name}>
+        <li key={item.name}>
           <NavLink 
-            to={x.to}
+            to={item.to}
             className='menuItem' 
             activeClassName='activeItem' 
             onClick={this.props.onNavLinkClick}
           >
-            {x.name}
+            {item.name}
           </NavLink>
         </li>
       )

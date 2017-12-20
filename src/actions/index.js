@@ -1,7 +1,7 @@
 
 /**
  * Beautyland Project - Actions
- * @author Roy Lu
+ * @author Roy Lu(royvbtw)
  */
 
 import { API_URL } from '../config'
@@ -13,39 +13,56 @@ export const SET_VIEW_OFFSET_Y = 'SET_VIEW_OFFSET_Y';
 
 export const requestList = (name) => {
   return {
-    type: REQUEST_LIST,
-    name
+    name,
+    type: REQUEST_LIST
   }
 };
 
 export const setViewOffsetY = (name, offset) => {
   return {
-    type: SET_VIEW_OFFSET_Y,
     name,
-    offset
+    offset,
+    type: SET_VIEW_OFFSET_Y
   };
 }
 
 export const receiveList = (name, page, list) => {
   return {
-    type: RECEIVE_LIST,
     name,
     page,
     list,
+    type: RECEIVE_LIST,
     receivedAt: new Date()
   }
 };
 
-// a thunk middleware
+// Thunk middlewares
+
 const fetchList = (name, page) => {
   return dispatch => {
     dispatch(requestList(name));
-    const url = `${API_URL}/${name}/${page}`;
+    let url;
+    if(name === 'samples'){
+      url = `${API_URL}/${name}`;
+    }else{
+      url = `${API_URL}/${name}/${page}`;
+    }
+    
     return fetch(url).then( res =>
       res.json()
     ).then(json => {
       dispatch(receiveList(name, page, json));
     });
+  };
+};
+
+// a thunk action
+export const loadmore = (name) => {
+  return (dispatch, getState) => {
+    const nextPage = getState().gallery[name].page + 1;
+    if(shouldFetchList(name, getState())){
+      dispatch(fetchList(name, nextPage));
+    }
   };
 };
 
@@ -57,16 +74,6 @@ function shouldFetchList(name, state){
     return true;
   }
 }
-
-// a thunk action
-export const loadmore = (name) => {
-  return (dispatch, getState) => {
-    const nextPage = getState().gallery[name].page + 1;
-    if(shouldFetchList(name, getState())){
-      dispatch(fetchList(name, nextPage));
-    }
-  };
-};
 
 
 

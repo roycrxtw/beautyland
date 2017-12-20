@@ -19,6 +19,13 @@ const initialState = {
     viewOffsetY: 0,
     updatedAt: new Date(),
     list: []
+  },
+  samples: {
+    isFetching: false,
+    page: 0,
+    viewOffsetY: 0,
+    updatedAt: new Date(),
+    list: []
   }
 };
 

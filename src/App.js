@@ -10,6 +10,7 @@ import { Route, Switch } from 'react-router-dom';
 import About from './components/About';
 import LatestGallery from './containers/LatestGallery';
 import TrendsGallery from './containers/TrendsGallery';
+import SampleGallery from './containers/SampleGallery';
 import PostDisplayer from './components/PostDisplayer';
 import NotFound from './components/NotFound'
 import Menu from './components/Menu';
@@ -57,6 +58,7 @@ export default class App extends Component {
             <Switch>
               <Route exact path='(/|/latest)' component={LatestGallery} />
               <Route exact path='/trends' component={TrendsGallery} />
+              <Route exact path='/samples' component={SampleGallery} />
               <Route exact path='/about' component={About} />
               <Route path='/post' component={PostDisplayer} />
               <Route component={PageNotFound} />
