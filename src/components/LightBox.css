@@ -85,3 +85,12 @@
 .infoBoxContent ul{
   list-style: none;
 }
+
+#post-id{
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  margin: 5px;
+  color: snow;
+  font-size: large;
+  font-family: "Microsoft JhengHei";
+}
