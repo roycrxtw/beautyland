@@ -1,4 +1,4 @@
-# Beatuyland 
+# Beautyland
 
 Beautyland is an image gallery for [PTT Beauty board](https://www.ptt.cc/bbs/Beauty). 
 
