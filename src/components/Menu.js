@@ -39,7 +39,7 @@ export default class Menu extends Component{
         <ul className='menuList'>
           {this.menuItems}
         </ul>
-        <p className='menuFooter'>Beaultyland<br/>2017</p>
+        <p className='menuFooter'>Beaultyland<br/>2018</p>
       </div>
     );
   }
