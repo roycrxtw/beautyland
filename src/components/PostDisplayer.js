@@ -134,6 +134,20 @@ export default class PostDisplayer extends Component{
     fetch(url, {method: 'PUT'}).then();  // simply send put request
   };
 
+  sharePostHandler = () => {
+    console.log(`sharePostHandler()`);
+    if(navigator.share){
+      console.log(`share api is available.`);
+      navigator.share({
+        title: this.state.post.title,
+        text: 'Elegant pictures from beautyland',
+        url: 'https://beautyland-api.royvbtw.uk/post/' + this.state.post.postId,
+      })
+      .then(() => console.log('Successful share'))
+      .catch((error) => console.log('Sharing failed: ', error));
+    }
+  };
+
 
   render(){
     const { post, isBoxOpen, boxContentType, boxContent } = this.state;
@@ -142,6 +156,11 @@ export default class PostDisplayer extends Component{
     if(post){
       content = (
         <div>
+          {(navigator.share) && (
+            <div className='btnShare' title='Share' onClick={this.sharePostHandler}>
+              <i className='material-icons'>share</i>
+            </div>
+          )}
           <div className='btnPostInfo' title='Post information' onClick={this.openInfoBox}>
             <i className="material-icons">help_outline</i>
           </div>

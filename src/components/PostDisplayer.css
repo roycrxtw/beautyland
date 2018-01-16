@@ -22,6 +22,22 @@
   background: rgba(255, 250, 250, 0.9);
 }
 
+.btnShare{
+  position: fixed;
+  left: 35px;
+  bottom: 190px;
+  width: 64px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 30;
+  cursor: pointer;
+}
+
 .postDisplayer{
   display: block;
   margin: 0;
