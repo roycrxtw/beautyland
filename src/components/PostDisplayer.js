@@ -134,20 +134,24 @@ export default class PostDisplayer extends Component{
     fetch(url, {method: 'PUT'}).then();  // simply send put request
   };
 
-  sharePostHandler = () => {
+  nativeShareHandler = () => {
     console.log(`sharePostHandler()`);
     if(navigator.share){
-      console.log(`share api is available.`);
       navigator.share({
         title: this.state.post.title,
-        text: 'Elegant pictures from beautyland',
-        url: 'https://beautyland-api.royvbtw.uk/post/' + this.state.post.postId,
+        text: '可愛正妹與您分享: ' + this.state.post.title,
+        url: 'https://beautyland.royvbtw.uk/post/' + this.state.post.postId,
       })
       .then(() => console.log('Successful share'))
       .catch((error) => console.log('Sharing failed: ', error));
     }
   };
 
+  twitterShareHandler = () => {
+    const text = '可愛正妹與您分享: ' + this.state.post.title;
+    const url = 'https://beautyland.royvbtw.uk/post/' + this.state.post.postId;
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=正妹`);
+  };
 
   render(){
     const { post, isBoxOpen, boxContentType, boxContent } = this.state;
@@ -156,13 +160,8 @@ export default class PostDisplayer extends Component{
     if(post){
       content = (
         <div>
-          {(navigator.share) && (
-            <div className='btnShare' title='Share' onClick={this.sharePostHandler}>
-              <i className='material-icons'>share</i>
-            </div>
-          )}
           <div className='btnPostInfo' title='Post information' onClick={this.openInfoBox}>
-            <i className="material-icons">help_outline</i>
+            <i className='material-icons'>help_outline</i>
           </div>
           <Gallery images={this.getPostImageList()}
             rowHeight={300}
@@ -200,6 +199,18 @@ export default class PostDisplayer extends Component{
           <i className="material-icons">chevron_left</i>
         </div>
         {content}
+
+        <div className='action-panel'>
+          {(navigator.share) && (
+            <div title='Share' onClick={this.nativeShareHandler}>
+              <i className='material-icons btnAction'>share</i>
+            </div>
+          )}
+
+          <div id='btnTwitterShare' title='Share to twitter' onClick={this.twitterShareHandler}>
+            <img id='icon-twitter' src={'/images/icon-twitter-darkslategrey.png'} alt='Share to twitter'/>
+          </div>
+        </div>
       </div>
     );
   }
