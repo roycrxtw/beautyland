@@ -9,10 +9,6 @@ import './NotFound.css';
 
 
 export default class NotFound extends Component{
-  constructor(props){
-    super(props);
-    console.log(props);
-  }
   goback = () => {
     this.props.history.goBack();
   }
