@@ -37,9 +37,11 @@ export default class PostDisplayer extends Component{
       boxContent: null
     };
 
+    // To check if there's any post data from the history object.
     if(!getSafely(() => props.location.state.post)){
       this.fetchPost(postId);
     }else{
+      document.title = 'Beautyland - ' + props.location.state.post.title;
       this.updateViewCount(postId);
       this.state = {
         ...this.state,
@@ -52,17 +54,22 @@ export default class PostDisplayer extends Component{
     this.props.history.goBack();
   };
 
+  // Once the user visit the post directly, we have to fetch the post from api directly.
   fetchPost = postId => {
     const url = `https://beautyland-api.royvbtw.uk/post/${postId}`;
   
     fetch(url).then( response => {
-      return response.json();   // note: json() returns a promise
-    }).then(data => {
-      if(Object.keys(data).length === 0 && data.constructor === Object){
-        // The API will return an empty object if the post doesn't exist.
-        this.setState({ post: null });
+      if(response.status === 200 || response.status === 304){
+        return response.json();   // note: json() returns a promise
       }else{
+        return null;
+      }
+    }).then(data => {
+      if(data){
+        document.title = 'Beautyland - ' + data.title;
         this.setState({ post: data });
+      }else{
+        this.setState({ post: null });
       }
     }).catch( err => {
       errorHandler({message: err.message});
@@ -194,7 +201,7 @@ export default class PostDisplayer extends Component{
     }
 
     return (
-      <div className='postDisplayer'>
+      <div className='post-displayer'>
         <div className='btnBack' title='Go back' onClick={this.gobackHandler}>
           <i className="material-icons">chevron_left</i>
         </div>
