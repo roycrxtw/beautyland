@@ -1,4 +1,8 @@
 
+.post-displayer{
+  margin: 0;
+}
+
 .btnPostInfo{
   display: flex;
   position: fixed;
@@ -29,11 +33,7 @@
   z-index: 30;
 }
 
-.postDisplayer{
-  display: block;
-  margin: 0;
-  border: 1px solid grey;
-}
+
 
 .action-panel{
   display: flex;
