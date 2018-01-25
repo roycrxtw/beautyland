@@ -19,6 +19,7 @@ export default class MainGallery extends Component {
   constructor(props){
     super(props);
     window.addEventListener('scroll', this.scrollHandler);
+    document.title = 'Beautyland';
   }
 
   componentWillMount(){
