@@ -146,7 +146,7 @@ export default class PostDisplayer extends Component{
     if(navigator.share){
       navigator.share({
         title: this.state.post.title,
-        text: '可愛正妹與您分享: ' + this.state.post.title,
+        text: 'Beautyland可愛正妹: ' + this.state.post.title,
         url: 'https://beautyland.royvbtw.uk/post/' + this.state.post.postId,
       })
       .then(() => console.log('Successful share'))
