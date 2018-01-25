@@ -24,22 +24,6 @@ body.hasActiveMenu{
   color: red;
 }
 
-.appContext{
-  /* border: 5px solid blue; */
-  transition: all 700ms;
-}
-.appContext.isActive{
-  transform: translateX(150px); 
-}
-
-/* to prevent a bug in chrome */
-@media (-webkit-min-device-pixel-ratio: 0) {
-  .appContext.isActive{
-    /* border: 5px solid yellow; */
-    transform: none;
-  }
-}
-
 .app-title{
   text-decoration: none;
   color: lightgrey;

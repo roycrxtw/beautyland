@@ -28,11 +28,6 @@ export default class MainGallery extends Component {
     }
   }
 
-  componentDidUpdate(){
-    const offset = this.props.viewOffsetY;
-    window.scroll(0, Math.ceil(offset));
-  }
-
   componentWillUnmount(){
     window.removeEventListener('scroll', this.scrollHandler);
   }
@@ -113,7 +108,7 @@ export default class MainGallery extends Component {
 
   render(){    
     return (
-      <div>
+      <div className='main-gallery'>
         <Gallery images={this.getGalleryImageList()}
           rowHeight={250}
           enableImageSelection={false}

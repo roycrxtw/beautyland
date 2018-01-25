@@ -33,7 +33,7 @@ export default class App extends Component {
   toggleMenu = () => {
     document.getElementsByClassName('mask')[0].classList.toggle('isActive');
     document.getElementsByClassName('menu')[0].classList.toggle('isActive');
-    document.getElementsByClassName('appContext')[0].classList.toggle('isActive');
+    document.getElementsByClassName('app-context')[0].classList.toggle('isActive');
     document.getElementsByClassName('btnMenu')[0].classList.toggle('isActive');
     document.getElementsByTagName('body')[0].classList.toggle('hasActiveMenu');
   };
@@ -52,7 +52,7 @@ export default class App extends Component {
         <div className='mask' onClick={this.toggleMenu}></div>
         <Menu onNavLinkClick={this.toggleMenu} />
         
-        <div className='appContext'>
+        <div className='app-context'>
           {Header}
           <div>
             <Switch>
