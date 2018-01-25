@@ -12,6 +12,7 @@
   background-color: #585858;
   color: snow;
   opacity: 0.1;
+  clear: both;
 }
 
 .btnLoadmore[disabled]{
