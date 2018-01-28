@@ -17,7 +17,7 @@ import Menu from './components/Menu';
 import './App.css';
 
 const Header = (
-  <div className="appHeader">
+  <div className="app-header">
     <div className='app-title'>Beautyland</div>
   </div>
 );

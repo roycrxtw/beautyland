@@ -33,10 +33,12 @@ body.hasActiveMenu{
   text-align: center;
 }
 
-.appHeader {
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #222;
   height: 85px;
-  padding: 35px;
 }
 
 .btnBack{

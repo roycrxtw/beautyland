@@ -1,31 +1,31 @@
 
 .about a{
-  color: wheat;
+  color: #EA9185;
 }
 .about a:hover{
   color: #D2BD97;
+  text-decoration: underline;
 }
 
 .about{
   position: relative;
   width: 100%;
   margin: 50px auto;
-  border-left: 30px solid slateblue;
+  border-left: 20px solid rgb(36, 39, 41);
+  border-radius: 3px;
   box-shadow: 0 0 5px snow;
   padding: 20px;
   background-color: rgb(50, 50, 50);
 
   color: snow;
+  font-weight: 100;
   text-align: left;
   overflow: hidden;
-
 }
 @media (min-width: 720px){
   .about{
     height: 100%;
     margin: 80px auto 60px 100px;
-    border-left: 30px solid wheat;
-    border-radius: 3px;
     padding: 30px 50px;
     font-size: large;
   }
