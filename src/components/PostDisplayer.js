@@ -56,7 +56,7 @@ export default class PostDisplayer extends Component{
 
   // Once the user visit the post directly, we have to fetch the post from api directly.
   fetchPost = postId => {
-    const url = `https://beautyland-api.royvbtw.uk/post/${postId}`;
+    const url = `https://beautyland-api.royvbtw.uk/posts/${postId}`;
   
     fetch(url).then( response => {
       if(response.status === 200 || response.status === 304){

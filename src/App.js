@@ -60,7 +60,7 @@ export default class App extends Component {
               <Route exact path='/trends' component={TrendsGallery} />
               <Route exact path='/samples' component={SampleGallery} />
               <Route exact path='/about' component={About} />
-              <Route path='/post' component={PostDisplayer} />
+              <Route path='/posts' component={PostDisplayer} />
               <Route component={PageNotFound} />
             </Switch> 
           </div>
