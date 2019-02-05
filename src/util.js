@@ -6,7 +6,7 @@
 export const getSafely = (fn) => {
   try{
     return fn();
-  }catch(ex){
+  }catch(ex) {
     return undefined;
   }
 };

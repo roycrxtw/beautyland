@@ -30,7 +30,7 @@ const initialState = {
 };
 
 const gallery = (state = initialState, action) => {
-  switch(action.type){
+  switch(action.type) {
     case SET_VIEW_OFFSET_Y: {
       return {
         ...state,

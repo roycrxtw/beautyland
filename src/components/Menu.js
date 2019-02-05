@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import './Menu.css';
 
 export default class Menu extends Component{
-  constructor(props){
+  constructor(props) {
     super(props);
     const menuData = [
       {name: 'Home', to: '/'},
@@ -17,7 +17,7 @@ export default class Menu extends Component{
       {name: 'About', to: '/about'},
     ];
 
-    this.menuItems = menuData.map( item => 
+    this.menuItems = menuData.map(item =>
       (
         <li key={item.name}>
           <NavLink 
@@ -33,15 +33,14 @@ export default class Menu extends Component{
     );
   }
 
-  render(){
+  render() {
     return (
       <div className='menu'>
         <ul className='menuList'>
           {this.menuItems}
         </ul>
-        <p className='menuFooter'>Beaultyland<br/>2018</p>
+        <p className='menuFooter'>Beautyland<br/>2019</p>
       </div>
     );
   }
-  
 }

@@ -3,6 +3,7 @@
  * Beautyland Project - Main Gallery
  */
 
+import _ from 'lodash';
 import React, { Component } from 'react';
 import Gallery from 'react-grid-gallery';
 
@@ -16,19 +17,19 @@ const basedata = [{
 }];
 
 export default class MainGallery extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     window.addEventListener('scroll', this.scrollHandler);
     document.title = 'Beautyland';
   }
 
-  componentWillMount(){
-    if(this.props.list.length === 0){   // load initial list data
+  componentWillMount() {
+    if (this.props.list.length === 0) {   // load initial list data
       this.props.dispatch(loadmore(this.props.gname));
     }
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.scrollHandler);
   }
 
@@ -49,11 +50,10 @@ export default class MainGallery extends Component {
     this.props.dispatch(setViewOffsetY(this.props.gname, window.scrollY))
 
     this.props.history.push({
-      pathname: `post/${postId}`,
+      pathname: `posts/${postId}`,
       state: {post: this.props.list[postIndex]}
     });
   };
-
 
   /**
    * To build the image list which will be used in the Gallery component
@@ -62,32 +62,32 @@ export default class MainGallery extends Component {
     let imageListForGallery = [];
     let postList = [];
     // if the props.postList does not load yet, use some default image instead.
-    if(this.props.list.length === 0){
+    if (this.props.list.length === 0) {
       postList = basedata;
-    }else{
+    } else {
       postList = this.props.list;
     }
-    postList.forEach( post => {
+    console.log(`getGalleryImageList: postLit`, postList);
+    postList.forEach(post => {
       const imageIndex = 0;
-      if(post.images[imageIndex].length === 0){
-        return;
-      }
+      if (_.isEmpty(post.images)) return;
+
       const imageData = {};
       imageData.src = post.images[imageIndex].url;
       imageData.thumbnail = imageData.src;
-      imageData.thumbnailWidth = (post.images[imageIndex].width)? post.images[imageIndex].width: 300;
-      imageData.thumbnailHeight = (post.images[imageIndex].height)? post.images[imageIndex].height: 300;
+      imageData.thumbnailWidth = (post.images[imageIndex].width) ? post.images[imageIndex].width : 300;
+      imageData.thumbnailHeight = (post.images[imageIndex].height) ? post.images[imageIndex].height : 300;
       imageListForGallery.push(imageData);
     });
     return imageListForGallery;
   };
 
-
   /**
    * Click event handler for loadMore button.
    */
   loadMore = event => {
-    if(this.props.isFetching || this.props.endOfList) return;
+    console.log(`component:MainGallery.loadMore(), event=`, event);
+    if (this.props.isFetching || this.props.endOfList) return;
     
     const viewOffsetY = window.scrollY;
     const newPageNumber = this.props.page + 1;
@@ -97,16 +97,16 @@ export default class MainGallery extends Component {
   };
 
   scrollHandler = () => {
-    if(!this.props.isFetching){
+    if (!this.props.isFetching) {
       const btnLoadMore = document.getElementsByClassName('btnLoadmore')[0];
       const isButtonInView = this.isScrollIntoView(btnLoadMore);
-      if(isButtonInView){
+      if (isButtonInView) {
         this.loadMore();
       }
     }
   };
 
-  render(){    
+  render() {    
     return (
       <div className='main-gallery'>
         <Gallery images={this.getGalleryImageList()}

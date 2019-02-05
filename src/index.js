@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -9,7 +10,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
-function Root(props){
+function Root(props) {
   return (
     <Provider store={store}>
       <Router basename='/'>
