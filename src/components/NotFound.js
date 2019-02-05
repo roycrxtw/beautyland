@@ -13,7 +13,7 @@ export default class NotFound extends Component{
     this.props.history.goBack();
   }
 
-  render(){
+  render() {
     const { children } = this.props;
     return (
       <div className='not-found'>

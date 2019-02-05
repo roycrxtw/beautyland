@@ -1,7 +1,7 @@
 
 /**
  * Beautyland Project - Actions
- * @author Roy Lu(royvbtw)
+ * @author Roy Lu(royxnatw)
  */
 
 import { API_URL } from '../config'
@@ -42,9 +42,9 @@ const fetchList = (name, page) => {
   return dispatch => {
     dispatch(requestList(name));
     let url;
-    if(name === 'samples'){   // the samples path does not have a page parameter.
+    if (name === 'samples') {   // the samples path does not have a page parameter.
       url = `${API_URL}/${name}`;
-    }else{
+    } else {
       url = `${API_URL}/${name}/${page}`;
     }
     
@@ -60,17 +60,17 @@ const fetchList = (name, page) => {
 export const loadmore = (name) => {
   return (dispatch, getState) => {
     const nextPage = getState().gallery[name].page + 1;
-    if(shouldFetchList(name, getState())){
+    if (shouldFetchList(name, getState())) {
       dispatch(fetchList(name, nextPage));
     }
   };
 };
 
-function shouldFetchList(name, state){
+function shouldFetchList(name, state) {
   const gallery = state.gallery[name];
-  if(gallery.isFetching || gallery.endOfList){
+  if (gallery.isFetching || gallery.endOfList) {
     return false;
-  }else{
+  } else {
     return true;
   }
 }

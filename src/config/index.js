@@ -2,8 +2,9 @@
 /**
  * Beautyland Project - Config file
  * @author Roy Lu
- * Oct, 2017
+ * Since Oct 2017
  */
 
 
-export const API_URL = 'https://beautyland-api.royvbtw.uk';
+export const API_URL = 'http://localhost:3004';
+// export const API_URL = 'https://beautyland-api.royxnatw.uk';

@@ -1,7 +1,7 @@
 
 /**
  * Beautyland Project - Post Displayer component
- * @author Roy Lu(royvbtw)
+ * @author Roy Lu(royxnatw)
  */
 
 import React, { Component } from 'react';
@@ -14,18 +14,18 @@ import { getSafely } from '../util';
 import './PostDisplayer.css';
 
 
-function errorHandler({message} = {}){
+function errorHandler({message} = {}) {
   console.log(message);
 }
 
-export default class PostDisplayer extends Component{
-  constructor(props){
+export default class PostDisplayer extends Component {
+  constructor(props) {
     super(props);
     let postId;
     const match = /post\/(.*)/.exec(props.location.pathname);
-    if(match){
+    if (match) {
       postId = match[1];
-    }else{
+    } else {
       postId = undefined;
     }
     
@@ -38,9 +38,9 @@ export default class PostDisplayer extends Component{
     };
 
     // To check if there's any post data from the history object.
-    if(!getSafely(() => props.location.state.post)){
+    if (!getSafely(() => props.location.state.post)) {
       this.fetchPost(postId);
-    }else{
+    } else {
       document.title = 'Beautyland - ' + props.location.state.post.title;
       this.updateViewCount(postId);
       this.state = {
@@ -56,19 +56,19 @@ export default class PostDisplayer extends Component{
 
   // Once the user visit the post directly, we have to fetch the post from api directly.
   fetchPost = postId => {
-    const url = `https://beautyland-api.royvbtw.uk/posts/${postId}`;
+    const url = `https://beautyland-api.royxnatw.uk/posts/${postId}`;
   
     fetch(url).then( response => {
-      if(response.status === 200 || response.status === 304){
+      if (response.status === 200 || response.status === 304) {
         return response.json();   // note: json() returns a promise
-      }else{
+      } else {
         return null;
       }
     }).then(data => {
-      if(data){
+      if (data) {
         document.title = 'Beautyland - ' + data.title;
         this.setState({ post: data });
-      }else{
+      } else {
         this.setState({ post: null });
       }
     }).catch( err => {
@@ -103,10 +103,10 @@ export default class PostDisplayer extends Component{
   getPostImageList = () => {
     const post = this.state.post;
     const imglist = [];
-    if(Object.keys(post).length === 0 && post.constructor === Object){
+    if (Object.keys(post).length === 0 && post.constructor === Object) {
       return imglist;
     }
-    if(post && post.images){
+    if (post && post.images) {
       post.images.forEach(element => {
         let temp = {};
         temp.src = element.url;
@@ -117,7 +117,7 @@ export default class PostDisplayer extends Component{
         temp.thumbnailHeight = element.height || 300;
         imglist.push(temp);
       });
-    }else if(post){  // compatible for old post data structure
+    } else if (post) {  // compatible for old post data structure
       post.imgUrls.forEach(x => {
         const temp = {};
         temp.src = x;
@@ -134,20 +134,20 @@ export default class PostDisplayer extends Component{
 
 
   /**
-   * Send a PUT reuqest to Beautyland api for update the view count for the specified post
+   * Send a PUT request to Beautyland api for update the view count for the specified post
    */
   updateViewCount = postId => { // #todo
-    const url = 'https://beautyland-api.royvbtw.uk/post/' + postId;
+    const url = 'https://beautyland-api.royxnatw.uk/post/' + postId;
     fetch(url, {method: 'PUT'}).then();  // simply send put request
   };
 
   nativeShareHandler = () => {
     console.log(`sharePostHandler()`);
-    if(navigator.share){
+    if (navigator.share) {
       navigator.share({
         title: this.state.post.title,
         text: 'Beautyland可愛正妹: ' + this.state.post.title,
-        url: 'https://beautyland.royvbtw.uk/post/' + this.state.post.postId,
+        url: 'https://beautyland.royxnatw.uk/post/' + this.state.post.postId,
       })
       .then(() => console.log('Successful share'))
       .catch((error) => console.log('Sharing failed: ', error));
@@ -156,15 +156,15 @@ export default class PostDisplayer extends Component{
 
   twitterShareHandler = () => {
     const text = '可愛正妹與您分享: ' + this.state.post.title;
-    const url = 'https://beautyland.royvbtw.uk/post/' + this.state.post.postId;
+    const url = 'https://beautyland.royxnatw.uk/post/' + this.state.post.postId;
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=正妹`);
   };
 
-  render(){
+  render() {
     const { post, isBoxOpen, boxContentType, boxContent } = this.state;
 
     let content = null;
-    if(post){
+    if (post) {
       content = (
         <div>
           <div className='btnPostInfo' title='Post information' onClick={this.openInfoBox}>
@@ -183,7 +183,7 @@ export default class PostDisplayer extends Component{
           />
         </div>
       );
-    }else if(post === undefined){
+    } else if (post === undefined) {
       content = (
         <NotFound>Loading post.</NotFound>
         // <div className='no-data-message'>
@@ -196,7 +196,7 @@ export default class PostDisplayer extends Component{
         //   </div>
         // </div>
       );
-    }else{
+    } else {
       content = (<NotFound>The post does not exist.</NotFound>);
     }
 

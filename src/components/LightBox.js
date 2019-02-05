@@ -25,15 +25,15 @@ export default class LightBox extends Component{
     document.execCommand('copy');
   };
   
-  render(){
+  render() {
     const tooltip = (
       <Tooltip id="tooltip">Click to copy</Tooltip>
     );
 
     let content = null;
-    if(this.props.type === 'image'){
+    if (this.props.type === 'image') {
       content = <img className='imageBoxContent' src={this.props.content} alt=''/>;
-    }else if(this.props.type === 'text'){
+    } else if (this.props.type === 'text') {
       content = (
       <div className='infoBoxContent' onClick={this.onInfoBox}>
         <div className='infoBoxHeader'>
@@ -62,7 +62,7 @@ export default class LightBox extends Component{
           <li>view counts: {this.props.content.viewCount}</li>
         </ul>
       </div>);
-    }else{
+    } else {
       content = <div>Good day, right?</div>;
     }
 
